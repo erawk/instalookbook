@@ -1,8 +1,11 @@
-!!!
-%html
-  %head
-    %title InstaLookBook
-    %link{ rel: 'stylesheet', href: 'application.css' }
-  %body
-    %script{ src: '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js' }
-    %script{ src: '/application.js' }
+.main
+  %ul
+  - images.each_pair do |k,v|
+    %li
+      %img{ src: v[:large], id: 'large-' + k, data: { id: k } }
+
+.thumbs
+  %ul
+  - images.each_pair do |k,v|
+    %li
+      %img{ src: v[:thumb], id: 'thumb-' + k, data: { id: k } }

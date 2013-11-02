@@ -15,19 +15,17 @@ get '/' do
   redirect '/oauth/connect'
 end
 
-get '/feed' do
-  client = Instagram.client(access_token: session[:access_token])
-  user = client.user
-
-  html = "<h1>#{user.username}'s recent photos</h1>"
-  for media_item in client.user_recent_media
-    html << "<img src='#{media_item.images.thumbnail.url}'>"
-  end
-  html
-end
-
 get '/lookbook' do
-  haml :lookbook
+  # collect bonobos images from instagram API
+  images = {}
+  Instagram.user_recent_media('8194723', count: 100).select{|m| m['type'] == 'image' }.map do |media|
+    images["img-#{media['id']}"] = {
+      thumb: media['images']['thumbnail']['url'],
+      large: media['images']['standard_resolution']['url']
+    }
+  end
+
+  haml :lookbook, layout: :application, locals: { images: images }
 end
 
 get '/oauth/callback' do
