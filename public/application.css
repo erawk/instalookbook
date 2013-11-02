@@ -525,3 +525,21 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+
+
+/* ==========================================================================
+   Application Specific
+   ========================================================================== */
+.container {
+}
+
+.container ul {
+  margin: 0;
+  padding: 0;
+}
+
+.container .thumbs ul li {
+  list-style-type: none;
+  display: inline-block;
+}
