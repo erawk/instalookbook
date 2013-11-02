@@ -16,9 +16,9 @@ get '/' do
 end
 
 get '/lookbook' do
-  # collect bonobos images from instagram API
+  # collect images from instagram API
   images = {}
-  Instagram.user_recent_media('8194723', count: 100).select{|m| m['type'] == 'image' }.map do |media|
+  Instagram.user_recent_media(ENV['INSTAGRAM_USER_ID'] || '8194723', count: 100, access_token: session[:access_token]).select{|m| m['type'] == 'image' }.map do |media|
     images["img-#{media['id']}"] = {
       thumb: media['images']['thumbnail']['url'],
       large: media['images']['standard_resolution']['url']
