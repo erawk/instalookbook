@@ -1,11 +1,3 @@
-.main
-  %ul
-    - images.each_pair do |k,v|
-      %li
-        %img{ src: v[:large], id: 'large-' + k, data: { id: k } }
-
 .thumbs
-  %ul
-    - images.each_pair do |k,v|
-      %li
-        %img{ src: v[:thumb], id: 'thumb-' + k, data: { id: k } }
+  - images.each_pair do |k,v|
+    %img.thumb{ src: v[:thumb], id: 'thumb-' + k, data: { id: k, large: v[:large] } }

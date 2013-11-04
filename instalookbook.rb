@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'haml'
 require 'instagram'
+require 'json'
 
 enable :sessions, :logging
 
@@ -18,7 +19,12 @@ end
 get '/lookbook' do
   # collect images from instagram API
   images = {}
-  Instagram.user_recent_media(ENV['INSTAGRAM_USER_ID'] || '8194723', count: 100, access_token: session[:access_token]).select{|m| m['type'] == 'image' }.map do |media|
+  if settings.environment == :development
+    data = JSON.parse(File.read('./recent_media.json'))['data']
+  else
+    data = Instagram.user_recent_media(ENV['INSTAGRAM_USER_ID'] || '8194723', count: 100, access_token: session[:access_token])
+  end
+  data.select{|m| m['type'] == 'image' }.map do |media|
     images["img-#{media['id']}"] = {
       thumb: media['images']['thumbnail']['url'],
       large: media['images']['standard_resolution']['url']

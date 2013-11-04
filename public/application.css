@@ -531,15 +531,43 @@ table {
 /* ==========================================================================
    Application Specific
    ========================================================================== */
-.container {
+
+html {
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-.container ul {
+body {
+  background-color: black;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.container .thumbs {
+  width: 100%;
+  height: 150px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  overflow-x: visible;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.container .thumbs img.thumb {
+  display: inline-block;
   margin: 0;
   padding: 0;
 }
 
-.container .thumbs ul li {
-  list-style-type: none;
-  display: inline-block;
+.container .thumbs img.thumb.picked {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  border: 2px solid white;
 }
